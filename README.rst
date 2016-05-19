@@ -10,13 +10,21 @@ Progress application computes user's progress in a course on ``post_save`` signa
 Open edX Platform Integration
 -----------------------------
 1. Update the version of ``progress-edx-platform-extensions`` in the appropriate requirements file (e.g. ``requirements/edx/custom.txt``).
-2. Add ‘progress’ to the list of installed apps in ``common.py``.
-3. Install progress app via requirements file
+2. Add ``progress`` to the list of installed apps in ``common.py``.
+3. Set these feature flag in ``common.py``
 
 .. code-block:: bash
+
+  'MARK_PROGRESS_ON_GRADING_EVENT': True,
+  'STUDENT_PROGRESS': True
+
+4. Install progress app via requirements file
+
+.. code-block:: bash
+
   $ pip install -r requirements/edx/custom.txt
 
-4. (Optional) Run tests:
+5. (Optional) Run tests:
 
 .. code-block:: bash
 
