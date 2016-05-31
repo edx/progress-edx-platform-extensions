@@ -19,7 +19,7 @@ from edx_notifications.lib.publisher import (
     get_notification_type
 )
 from edx_notifications.data import NotificationMessage
-from openedx.core.djangoapps.content.course_metadata.utils import is_progress_detached_vertical
+from course_metadata.utils import is_progress_detached_vertical
 
 from progress.models import StudentProgress, StudentProgressHistory, CourseModuleCompletion
 
