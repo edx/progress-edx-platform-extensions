@@ -16,7 +16,7 @@ from student.tests.factories import UserFactory, CourseEnrollmentFactory
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase, mixed_store_config
 from xmodule.modulestore.tests.factories import CourseFactory, ItemFactory
 
-MODULESTORE_CONFIG = mixed_store_config(settings.COMMON_TEST_DATA_ROOT, {}, include_xml=False)
+MODULESTORE_CONFIG = mixed_store_config(settings.COMMON_TEST_DATA_ROOT, {})
 
 
 @override_settings(MODULESTORE=MODULESTORE_CONFIG)

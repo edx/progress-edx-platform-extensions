@@ -22,18 +22,19 @@ from progress.models import CourseModuleCompletion, StudentProgress, StudentProg
 from courseware.model_data import FieldDataCache
 from courseware import module_render
 from util.signals import course_deleted
+from edx_solutions_api_integration.test_utils import SignalDisconnectTestMixin
 
 from edx_notifications.startup import initialize as initialize_notifications
 from edx_notifications.lib.consumer import get_notifications_count_for_user
 
 
-MODULESTORE_CONFIG = mixed_store_config(settings.COMMON_TEST_DATA_ROOT, {}, include_xml=False)
+MODULESTORE_CONFIG = mixed_store_config(settings.COMMON_TEST_DATA_ROOT, {})
 
 
 @override_settings(MODULESTORE=MODULESTORE_CONFIG)
 @override_settings(STUDENT_GRADEBOOK=True)
 @patch.dict(settings.FEATURES, {'ENABLE_NOTIFICATIONS': True})
-class CourseModuleCompletionTests(ModuleStoreTestCase):
+class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase):
     """ Test suite for CourseModuleCompletion """
 
     def get_module_for_user(self, user, course, problem):
