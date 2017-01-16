@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='progress-edx-platform-extensions',
-    version='1.0.1',
+    version='1.0.2',
     description='Progress management extension for edX platform',
     long_description=open('README.rst').read(),
     author='edX',
@@ -12,6 +12,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "django>=1.4,<1.5",
+        "django>=1.8",
     ],
 )

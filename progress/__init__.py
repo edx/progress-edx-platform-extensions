@@ -1,4 +1,4 @@
 """
 Initialization module for progress djangoapp
 """
-import progress.signals
+default_app_config = 'progress.apps.SolutionsAppProgressConfig'
