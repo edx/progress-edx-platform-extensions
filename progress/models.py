@@ -96,28 +96,28 @@ class StudentProgress(models.Model):
                     'id': 123,
                     'username': 'testuser1',
                     'title': 'Engineer',
-                    'avatar_url': 'http://gravatar.com/123/',
+                    'profile_image_uploaded_at': '2014-01-15 06:27:54',
                     'completions': 0.92
                 },
                 {
                     'id': 983,
                     'username': 'testuser2',
                     'title': 'Analyst',
-                    'avatar_url': 'http://gravatar.com/983/',
+                    'profile_image_uploaded_at': '2014-01-15 06:27:54',
                     'completions': 0.91
                 },
                 {
                     'id': 246,
                     'username': 'testuser3',
                     'title': 'Product Owner',
-                    'avatar_url': 'http://gravatar.com/246/',
+                    'profile_image_uploaded_at': '2014-01-15 06:27:54',
                     'completions': 0.90
                 },
                 {
                     'id': 357,
                     'username': 'testuser4',
                     'title': 'Director',
-                    'avatar_url': 'http://gravatar.com/357/',
+                    'profile_image_uploaded_at': '2014-01-15 06:27:54',
                     'completions': 0.89
                 },
         ]
@@ -135,7 +135,7 @@ class StudentProgress(models.Model):
             'user__id',
             'user__username',
             'user__profile__title',
-            'user__profile__avatar_url',
+            'user__profile__profile_image_uploaded_at',
             'completions')\
             .order_by('-completions', 'modified')[:count]
 
