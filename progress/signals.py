@@ -11,12 +11,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.locator import BlockUsageLocator
-from student.roles import get_aggregate_exclusion_user_ids
 from util.signals import course_deleted
 
 from edx_notifications.lib.publisher import (
     publish_notification_to_user,
     get_notification_type
+)
+from edx_solutions_api_integration.utils import (
+    invalid_user_data_cache,
+    get_aggregate_exclusion_user_ids,
 )
 from edx_notifications.data import NotificationMessage
 from course_metadata.utils import is_progress_detached_vertical
@@ -64,6 +67,7 @@ def handle_cmc_post_save_signal(sender, instance, created, **kwargs):  # pylint:
             progress = StudentProgress.objects.get(user=instance.user, course_id=instance.course_id)
             progress.completions = F('completions') + 1
             progress.save()
+            invalid_user_data_cache('progress', instance.course_id, instance.user.id)
         except ObjectDoesNotExist:
             progress = StudentProgress(user=instance.user, course_id=instance.course_id, completions=1)
             progress.save()
