@@ -163,6 +163,9 @@ class CourseModuleCompletion(TimeStampedModel):
     content_id = models.CharField(max_length=255, db_index=True)
     stage = models.CharField(max_length=255, null=True, blank=True)
 
+    class Meta(object):
+        unique_together = ('course_id', 'content_id', 'user')
+
     @classmethod
     def get_actual_completions(cls):
         """
