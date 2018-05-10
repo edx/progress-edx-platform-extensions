@@ -160,7 +160,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
             )
             ItemFactory.create(
                 parent_location=vertical3.location,
-                category='discussion-course',
+                category='discussion-forum',
                 display_name="Course Discussion Item",
             )
 
@@ -387,7 +387,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
 
     @override_settings(
         PROGRESS_DETACHED_CATEGORIES=["group-project"],
-        PROGRESS_DETACHED_VERTICAL_CATEGORIES=["discussion-course"],
+        PROGRESS_DETACHED_VERTICAL_CATEGORIES=["discussion-forum"],
     )
     @ddt.data(ModuleStoreEnum.Type.split, ModuleStoreEnum.Type.mongo)
     def test_progress_calc_on_vertical_with_detached_module(self, store):
