@@ -1,10 +1,15 @@
 progress-edx-platform-extensions
-===================
+================================
 
 progress-edx-platform-extensions (``progress``) is a Django application responsible for
 calculating and persisting user's progress in different modules of a course.
 Progress application computes user's progress in a course on ``post_save`` signale of
 ``CourseModuleCompletion`` model.
+
+.. note::
+
+    This application is now deprecated, please use
+    `edx-completion <https://pypi.org/project/edx-completion/>`_ instead.
 
 
 Open edX Platform Integration
