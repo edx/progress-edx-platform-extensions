@@ -25,7 +25,7 @@ from xmodule.modulestore.tests.factories import CourseFactory, ItemFactory
 from progress.models import CourseModuleCompletion, StudentProgress, StudentProgressHistory
 from courseware.model_data import FieldDataCache
 from courseware import module_render
-from util.signals import course_deleted
+from xmodule.modulestore.django import SignalHandler
 from edx_solutions_api_integration.test_utils import SignalDisconnectTestMixin
 from edx_notifications.startup import initialize as initialize_notifications
 from edx_notifications.lib.consumer import get_notifications_count_for_user
@@ -418,7 +418,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
         history = StudentProgressHistory.objects.all()
         self.assertEqual(len(history), 1)
 
-        course_deleted.send(sender=None, course_key=self.course.id)
+        SignalHandler.course_deleted.send(sender=None, course_key=self.course.id)
 
         progress = StudentProgress.objects.all()
         self.assertEqual(len(progress), 0)

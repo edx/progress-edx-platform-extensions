@@ -11,7 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.locator import BlockUsageLocator
-from util.signals import course_deleted
+from xmodule.modulestore.django import SignalHandler
 
 from edx_notifications.lib.publisher import (
     publish_notification_to_user,
@@ -167,7 +167,7 @@ def handle_progress_post_save_signal(sender, instance, **kwargs):  # pylint: dis
                 log.exception(ex)
 
 
-@receiver(course_deleted)
+@receiver(SignalHandler.course_deleted)
 def on_course_deleted(sender, **kwargs):  # pylint: disable=W0613
     """
     Listens for a 'course_deleted' signal and when observed
