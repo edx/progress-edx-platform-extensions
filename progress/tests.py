@@ -6,10 +6,11 @@ Run these tests @ Devstack:
 """
 import uuid
 import ddt
+import pytz
 
 from mock import MagicMock, patch
 from datetime import datetime
-from django.utils.timezone import UTC
+from django.utils.timezone import utc
 from django.test.utils import override_settings
 from django.conf import settings
 from capa.tests.response_xml_factory import StringResponseXMLFactory
@@ -225,7 +226,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
         Save a CourseModuleCompletion with the feature flag on a course that has not yet started
         but Admins should be able to write
         """
-        self._create_course(store=store, start=datetime(3000, 1, 1, tzinfo=UTC()))
+        self._create_course(store=store, start=datetime(3000, 1, 1, tzinfo=utc))
 
         self.user = AdminFactory()
 
@@ -246,7 +247,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
         Save a CourseModuleCompletion with the feature flag on a course that has not yet started
         but Staff should be able to write
         """
-        self._create_course(store=store, start=datetime(3000, 1, 1, tzinfo=UTC()))
+        self._create_course(store=store, start=datetime(3000, 1, 1, tzinfo=utc))
 
         self.user = StaffFactory(course_key=self.course.id)
 
@@ -267,7 +268,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
         Save a CourseModuleCompletion with the feature flag on a course that has not yet started
         but Admins should be able to write
         """
-        self._create_course(store=store, end=datetime(1999, 1, 1, tzinfo=UTC()))
+        self._create_course(store=store, end=datetime(1999, 1, 1, tzinfo=utc))
 
         self.user = AdminFactory()
 
@@ -288,7 +289,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
         Save a CourseModuleCompletion with the feature flag on a course that has not yet started
         but Staff should be able to write
         """
-        self._create_course(store=store, end=datetime(1999, 1, 1, tzinfo=UTC()))
+        self._create_course(store=store, end=datetime(1999, 1, 1, tzinfo=utc))
 
         self.user = StaffFactory(course_key=self.course.id)
 
@@ -308,7 +309,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
         """
         Save a CourseModuleCompletion with the feature flag, but the course has not yet started
         """
-        self._create_course(store=store, start=datetime(3000, 1, 1, tzinfo=UTC()))
+        self._create_course(store=store, start=datetime(3000, 1, 1, tzinfo=utc))
 
         module = self.get_module_for_user(self.user, self.course, self.problem4)
         module.system.publish(module, 'progress', {})
@@ -328,8 +329,8 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
         """
         self._create_course(
             store=store,
-            start=datetime.now(UTC()),
-            end=datetime(2000, 1, 1, tzinfo=UTC())
+            start=datetime.now(pytz.UTC),
+            end=datetime(2000, 1, 1, tzinfo=utc)
         )
 
         module = self.get_module_for_user(self.user, self.course, self.problem4)
@@ -406,8 +407,8 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
     def test_receiver_on_course_deleted(self, store):
         self._create_course(
             store=store,
-            start=datetime(2010, 1, 1, tzinfo=UTC()),
-            end=datetime(2020, 1, 1, tzinfo=UTC())
+            start=datetime(2010, 1, 1, tzinfo=utc),
+            end=datetime(2020, 1, 1, tzinfo=utc)
         )
         module = self.get_module_for_user(self.user, self.course, self.problem)
         module.system.publish(module, 'progress', {})
