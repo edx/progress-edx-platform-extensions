@@ -21,22 +21,21 @@ class Command(BaseCommand):
     Recalculate progress entries for the specified course(s) and/or user(s)
     """
     help = 'Recalculate existing users progress per course'
-    option_list = BaseCommand.option_list + (
-        make_option(
+    def add_arguments(self, parser):
+        parser.add_argument(
             "-c",
             "--course_ids",
             dest="course_ids",
             help="List of courses for which to Recalculate progress",
             metavar="first/course/id,second/course/id"
         ),
-        make_option(
+        parser.add_argument(
             "-u",
             "--user_ids",
             dest="user_ids",
             help="List of users for which to Recalculate progress",
             metavar="1234,2468,3579"
         ),
-    )
 
     def handle(self, *args, **options):
         course_ids = options.get('course_ids')
