@@ -407,7 +407,7 @@ class CourseModuleCompletionTests(SignalDisconnectTestMixin, ModuleStoreTestCase
         self._create_course(
             store=store,
             start=datetime(2010, 1, 1, tzinfo=UTC()),
-            end=datetime(2020, 1, 1, tzinfo=UTC())
+            end=datetime(2040, 1, 1, tzinfo=UTC())
         )
         module = self.get_module_for_user(self.user, self.course, self.problem)
         module.system.publish(module, 'progress', {})
